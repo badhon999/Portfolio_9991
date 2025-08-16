@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog — Md. Hasibul Kadher Badhon</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>try{const t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t)}}catch(e){}</script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="index.html#home" class="brand"><img src="Images/mylogo.png" class="brand-logo" alt="Logo"/> <span>Hasibul Badhon</span></a>
+      <ul class="nav-list">
+        <li><a href="Hobby.html" data-i18n="nav_hobby">Hobby</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a class="btn btn-sm" href="CV.html">CV</a></li>
+      </ul>
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm0 14a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm8-5a1 1 0 0 1 1 1h2a1 1 0 1 1 0 2h-2a1 1 0 1 1-2 0 1 1 0 0 1 1-1zm-9 7a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 12a1 1 0 0 1 1-1H2a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2H4a1 1 0 0 1-1 1z"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>Blog</h1>
+      <p class="muted">Notes on security, web, and career.</p>
+      <div id="blog-list" class="cards"></div>
+    </div>
+  </main>
+  
+  <script>
+    // Load and render posts
+    fetch('posts.json').then(r=>r.json()).then(posts=>{
+      posts.sort((a,b)=>new Date(b.date)-new Date(a.date)); // newest first
+      const list = document.getElementById('blog-list');
+      list.innerHTML = posts.map(p=>`
+        <article class="card">
+          <h3><a href="Post.html?slug=${encodeURIComponent(p.slug)}">${p.title}</a></h3>
+          <p class="muted">${p.excerpt||''}</p>
+          <p class="small muted">
+            Published: <time datetime="${p.date}">${new Date(p.date).toLocaleDateString()}</time>
+            ${p.tags ? ` · ${p.tags.map(t=>`<span class='tags'><span>${t}</span></span>`).join('')}` : ''}
+          </p>
+        </article>
+      `).join('');
+    }).catch(err=>{
+      document.getElementById('blog-list').innerHTML = `<p class="muted">Could not load posts.json</p>`;
+      console.error(err);
+    });
+  </script>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="muted small">© <span id="y"></span> Md. Hasibul Kadher Badhon</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="Hobby.html">Hobby</a>
+        <a href="CV.html">CV</a>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js" defer></script>
+</body>
+</html>

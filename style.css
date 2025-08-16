@@ -1,0 +1,402 @@
+/* ===== Base & Theme (palette: brand #2b6777, accent #c8d8e4) ===== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{height:100%}
+:root{
+  --bg:#0b0e13; --bg-rgb:11,14,19; --surface:#121722; --surface-rgb:18,23,34; --text:#e6e8ee; --muted:#9aa3b2;
+  --brand:#2b6777; /* provided */
+  --accent:#c8d8e4; /* provided */
+  --card:#0e141f; --card-rgb:14,20,31; --stroke:#223048; --stroke-rgb:34,48,72; --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+[data-theme="light"]{
+  --bg:#ffffff; --bg-rgb:255,255,255; --surface:#f5f7fb; --surface-rgb:245,247,251; --text:#1a1f2b; --muted:#5b6574; --card:#ffffff; --card-rgb:255,255,255; --stroke:#e5e9f2; --stroke-rgb:229,233,242;
+  --brand:#2b6777; --accent:#c8d8e4;
+}
+
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+img{max-width:100%;display:block}
+.container{max-width:1100px;margin-inline:auto;padding:0 1rem}
+.section{padding:4.5rem 0}
+.section.alt{background:var(--surface)}
+
+h1,h2,h3{line-height:1.2;margin:0 0 .75rem}
+h1{font-size:clamp(2rem,1.3rem+3vw,3.25rem)}
+h2{font-size:clamp(1.5rem,1.1rem+1.8vw,2.2rem)}
+h3{font-size:1.15rem}
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
+.accent{color:var(--accent)}
+
+/* ===== Header / Nav ===== */
+.site-header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(var(--bg-rgb),.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--stroke)}
+.nav{display:flex;align-items:center;justify-content:space-between;min-height:64px;gap:1rem}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--text);font-weight:600}
+.brand-logo{width:35px;height:35px;border-radius:50%;object-fit:cover;border:1px solid var(--stroke)}
+.nav-list{display:flex;align-items:center;gap:1rem;list-style:none;margin:0;padding:0}
+.nav-list a{color:var(--text);text-decoration:none}
+.nav-list a.active{color:var(--brand)}
+.nav-toggle{display:none;gap:.35rem;border:0;background:transparent}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--text)}
+.divider{width:1px;height:22px;background:var(--stroke)}
+.icon-btn{display:inline-grid;place-items:center;min-width:40px;height:40px;padding:0 .6rem;border-radius:12px;background:var(--card);border:1px solid var(--stroke);color:var(--text);transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.icon-btn:hover{background:var(--surface);border-color:var(--brand);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.15)}
+.icon-btn svg{width:22px;height:22px;fill:currentColor}
+/* Theme toggle button specific styles */
+#theme-toggle{background:var(--card);border-color:var(--stroke);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+#theme-toggle:hover{background:var(--surface);border-color:var(--brand);transform:translateY(-2px);box-shadow:0 4px 16px rgba(43,103,119,0.2)}
+/* Ensure visibility in dark mode */
+[data-theme="dark"] #theme-toggle{background:var(--surface);border-color:var(--brand);color:var(--accent);box-shadow:0 2px 12px rgba(43,103,119,0.3)}
+[data-theme="dark"] #theme-toggle:hover{background:var(--card);border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 16px rgba(200,216,228,0.4)}
+/* Focus styles for accessibility */
+#theme-toggle:focus{outline:2px solid var(--brand);outline-offset:2px}
+#theme-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+/* Active state */
+#theme-toggle:active{transform:translateY(0);box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+/* Ensure button is always visible */
+#theme-toggle{position:relative;z-index:10}
+/* Enhanced background for better visibility */
+#theme-toggle{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+/* Additional styling for better contrast */
+#theme-toggle svg{filter:drop-shadow(0 1px 2px rgba(0,0,0,0.3))}
+/* Ensure proper spacing */
+.nav-list .icon-btn{margin-left:0.5rem}
+/* Specific spacing for language toggle */
+#lang-toggle{margin-left:0.75rem}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .icon-btn{min-width:36px;height:36px;padding:0 .5rem}
+  .icon-btn svg{width:20px;height:20px}
+}
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  #theme-toggle{border-width:2px}
+  #theme-toggle:focus{outline-width:3px}
+  #lang-toggle{border-width:2px}
+  #lang-toggle:focus{outline-width:3px}
+}
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .icon-btn{transition:none}
+  .icon-btn:hover{transform:none}
+  #lang-toggle{animation:none}
+  #lang-toggle:hover{animation:none}
+  #lang-toggle:focus-visible{animation:none}
+  #lang-toggle:hover::before{animation:none}
+}
+/* Print styles */
+@media print {
+  #theme-toggle{display:none}
+  #lang-toggle{display:none}
+}
+/* Dark mode specific enhancements */
+[data-theme="dark"] .icon-btn{background:rgba(18,23,34,0.8)}
+[data-theme="dark"] .icon-btn:hover{background:rgba(14,20,31,0.9)}
+/* Dark mode specific enhancements for language toggle */
+[data-theme="dark"] #lang-toggle{background:rgba(18,23,34,0.9);border-color:var(--brand)}
+/* Light mode specific enhancements */
+#lang-toggle{font-size:14px;font-weight:600;min-width:60px}
+/* Light mode specific enhancements for language toggle */
+[data-theme="light"] #lang-toggle{background:rgba(255,255,255,0.95);border-color:var(--stroke)}
+/* Final touch - ensure button is always clickable */
+.icon-btn{cursor:pointer;user-select:none;-webkit-user-select:none}
+/* Final touch for language toggle */
+#lang-toggle{will-change:transform,box-shadow,background-color}
+/* Ensure proper stacking context */
+.icon-btn{isolation:isolate}
+/* Ensure proper stacking context for language toggle */
+#lang-toggle{isolation:isolate}
+/* Additional hover effects */
+.icon-btn:hover::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(45deg,transparent,rgba(255,255,255,0.1),transparent);pointer-events:none}
+/* Additional hover effects for language toggle */
+#lang-toggle:hover::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at center,rgba(255,255,255,0.1),transparent);pointer-events:none;opacity:0;animation:fadeIn 0.3s ease-out forwards}
+/* Ensure button text is readable */
+.icon-btn{font-size:0;line-height:0}
+/* Language toggle button specific styles */
+#lang-toggle{font-size:14px;font-weight:600;min-width:60px;color:var(--text) !important;text-align:center;letter-spacing:0.5px;padding:0 1rem;height:40px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;position:relative;z-index:10;border:1px solid var(--stroke);background:var(--card);cursor:pointer;user-select:none;-webkit-user-select:none;overflow:hidden}
+#lang-toggle:hover{background:var(--surface);border-color:var(--brand);color:var(--brand);transform:translateY(-2px);box-shadow:0 4px 16px rgba(43,103,119,0.2);animation:bounce 0.6s ease-in-out}
+@keyframes bounce{0%,20%,53%,80%,100%{transform:translateY(-2px)}40%,43%{transform:translateY(-4px)}70%{transform:translateY(-3px)}90%{transform:translateY(-2px)}}
+#lang-toggle:hover::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(45deg,transparent,rgba(255,255,255,0.1),transparent);pointer-events:none;animation:shimmer 1.5s ease-in-out infinite}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+/* Dark mode specific styles for language toggle */
+[data-theme="dark"] #lang-toggle{background:var(--surface);border-color:var(--brand);color:var(--accent)}
+[data-theme="dark"] #lang-toggle:hover{background:var(--card);border-color:var(--accent);color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 16px rgba(200,216,228,0.4);animation:bounce 0.6s ease-in-out}
+/* Focus styles for language toggle */
+#lang-toggle:focus{outline:2px solid var(--brand);outline-offset:2px}
+#lang-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:2px;animation:pulse 0.6s ease-in-out}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+/* Active state for language toggle */
+#lang-toggle:active{transform:translateY(0);box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+#lang-toggle:active::before{opacity:0.5}
+/* Animation effects for language toggle */
+#lang-toggle{animation:fadeIn 0.5s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+/* Responsive adjustments for language toggle */
+@media (max-width: 768px) {
+  #lang-toggle{min-width:50px;font-size:12px;padding:0 0.4rem;height:36px}
+}
+@media (max-width: 480px) {
+  #lang-toggle{min-width:45px;font-size:11px;padding:0 0.3rem;height:32px}
+}
+/* Smooth transitions for language toggle */
+#lang-toggle{transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
+/* Enhanced styling for language toggle */
+#lang-toggle{box-shadow:0 2px 8px rgba(0,0,0,0.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+/* Final accessibility improvements */
+.icon-btn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+/* Final accessibility improvements for language toggle */
+#lang-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:2px;box-shadow:0 0 0 4px rgba(43,103,119,0.2)}
+/* Ensure proper contrast in all themes */
+.icon-btn{color:var(--text) !important}
+/* Ensure proper contrast for language toggle */
+#lang-toggle{color:var(--text) !important;text-shadow:0 1px 2px rgba(0,0,0,0.1)}
+/* Enhanced text shadow for better readability */
+[data-theme="dark"] #lang-toggle{text-shadow:0 1px 3px rgba(0,0,0,0.3)}
+[data-theme="light"] #lang-toggle{text-shadow:0 1px 1px rgba(255,255,255,0.8)}
+/* Ensure SVG inherits color properly */
+.icon-btn svg{color:inherit}
+/* Ensure button is always above other elements */
+.icon-btn{z-index:100}
+/* Ensure language toggle is always above other elements */
+#lang-toggle{z-index:101}
+/* Ensure button has proper dimensions */
+.icon-btn{min-height:40px;min-width:40px}
+/* Ensure language toggle has proper dimensions */
+#lang-toggle{min-height:40px;min-width:60px}
+/* Ensure button is properly positioned */
+.icon-btn{position:relative;display:inline-flex}
+/* Ensure language toggle is properly positioned */
+#lang-toggle{position:relative;display:inline-flex}
+/* Ensure button content is centered */
+.icon-btn{align-items:center;justify-content:center}
+/* Ensure language toggle content is centered */
+#lang-toggle{align-items:center;justify-content:center}
+/* Ensure button has proper spacing */
+.icon-btn{padding:8px}
+/* Ensure language toggle has proper spacing */
+#lang-toggle{padding:0 1rem}
+/* Ensure button has proper border radius */
+.icon-btn{border-radius:8px}
+/* Ensure language toggle has proper border radius */
+#lang-toggle{border-radius:10px}
+/* Ensure button has proper border */
+.icon-btn{border:1px solid var(--stroke)}
+/* Ensure language toggle has proper border */
+#lang-toggle{border:1px solid var(--stroke)}
+/* Ensure button has proper background */
+.icon-btn{background:var(--card)}
+/* Ensure language toggle has proper background */
+#lang-toggle{background:var(--card)}
+/* Ensure button has proper transition */
+.icon-btn{transition:all 0.2s ease}
+/* Ensure language toggle has proper transition */
+#lang-toggle{transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
+/* Ensure button has proper hover effect */
+.icon-btn:hover{background:var(--surface);transform:translateY(-1px)}
+/* Ensure button has proper active effect */
+.icon-btn:active{transform:translateY(0)}
+/* Ensure button has proper focus effect */
+.icon-btn:focus{outline:2px solid var(--brand);outline-offset:2px}
+/* Ensure button has proper focus visible effect */
+.icon-btn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+/* Ensure button has proper disabled state */
+.icon-btn:disabled{opacity:0.5;cursor:not-allowed}
+/* Ensure button has proper loading state */
+.icon-btn.loading{opacity:0.7;pointer-events:none}
+/* Ensure button has proper success state */
+.icon-btn.success{background:var(--brand);color:#fff}
+/* Ensure button has proper error state */
+.icon-btn.error{background:#dc2626;color:#fff}
+/* Ensure button has proper warning state */
+.icon-btn.warning{background:#f59e0b;color:#fff}
+/* Ensure button has proper info state */
+.icon-btn.info{background:#3b82f6;color:#fff}
+/* Ensure button has proper primary state */
+.icon-btn.primary{background:var(--brand);color:#fff}
+/* Ensure button has proper secondary state */
+.icon-btn.secondary{background:var(--surface);color:var(--text)}
+/* Ensure button has proper outline state */
+.icon-btn.outline{background:transparent;border-color:var(--brand);color:var(--brand)}
+/* Ensure button has proper ghost state */
+.icon-btn.ghost{background:transparent;border-color:transparent;color:var(--text)}
+/* Ensure button has proper link state */
+.icon-btn.link{background:transparent;border-color:transparent;color:var(--brand);text-decoration:underline}
+/* Ensure button has proper text state */
+.icon-btn.text{background:transparent;border-color:transparent;color:var(--text)}
+/* Ensure button has proper size variants */
+.icon-btn.small{min-width:32px;min-height:32px;padding:6px}
+.icon-btn.large{min-width:48px;min-height:48px;padding:12px}
+/* Ensure button has proper shape variants */
+.icon-btn.rounded{border-radius:50%}
+.icon-btn.square{border-radius:4px}
+/* Ensure button has proper animation variants */
+.icon-btn.animate{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+/* Ensure button has proper loading animation */
+.icon-btn.loading::after{content:"";position:absolute;width:16px;height:16px;border:2px solid transparent;border-top:2px solid currentColor;border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* Ensure button has proper ripple effect */
+.icon-btn.ripple{position:relative;overflow:hidden}
+.icon-btn.ripple::before{content:"";position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,0.3);border-radius:50%;transform:translate(-50%,-50%);transition:width 0.6s,height 0.6s}
+.icon-btn.ripple:active::before{width:300px;height:300px}
+/* Ensure button has proper glow effect */
+.icon-btn.glow{box-shadow:0 0 20px rgba(43,103,119,0.3)}
+.icon-btn.glow:hover{box-shadow:0 0 30px rgba(43,103,119,0.5)}
+/* Ensure button has proper neon effect */
+.icon-btn.neon{box-shadow:0 0 5px currentColor,0 0 10px currentColor,0 0 15px currentColor}
+.icon-btn.neon:hover{box-shadow:0 0 10px currentColor,0 0 20px currentColor,0 0 30px currentColor}
+/* Ensure button has proper 3D effect */
+.icon-btn.three-d{transform:perspective(1000px) rotateX(0deg)}
+.icon-btn.three-d:hover{transform:perspective(100px) rotateX(10deg)}
+/* Ensure button has proper flip effect */
+.icon-btn.flip{transform-style:preserve-3d;transition:transform 0.6s}
+.icon-btn.flip:hover{transform:rotateY(180deg)}
+/* Ensure button has proper bounce effect */
+.icon-btn.bounce:hover{animation:bounce 0.6s}
+@keyframes bounce{0%,20%,53%,80%,100%{transform:translate3d(0,0,0)}40%,43%{transform:translate3d(0,-30px,0)}70%{transform:translate3d(0,-15px,0)}90%{transform:translate3d(0,-4px,0)}}
+/* Ensure button has proper shake effect */
+.icon-btn.shake:hover{animation:shake 0.6s}
+@keyframes shake{0%,100%{transform:translateX(0)}10%,30%,50%,70%,90%{transform:translateX(-10px)}20%,40%,60%,80%{transform:translateX(10px)}}
+/* Ensure button has proper tada effect */
+.icon-btn.tada:hover{animation:tada 0.6s}
+@keyframes tada{0%{transform:scale(1)}10%,20%{transform:scale(0.9) rotate(-3deg)}30%,50%,70%,90%{transform:scale(1.1) rotate(3deg)}40%,60%,80%{transform:scale(1.1) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+/* Ensure button has proper wobble effect */
+.icon-btn.wobble:hover{animation:wobble 0.6s}
+@keyframes wobble{0%{transform:translateX(0%)}15%{transform:translateX(-25%) rotate(-5deg)}30%{transform:translateX(20%) rotate(3deg)}45%{transform:translateX(-15%) rotate(-3deg)}60%{transform:translateX(10%) rotate(2deg)}75%{transform:translateX(-5%) rotate(-1deg)}100%{transform:translateX(0%)}}
+/* Ensure button has proper jello effect */
+.icon-btn.jello:hover{animation:jello 0.6s}
+@keyframes jello{0%,11.1%,100%{transform:none}22.2%{transform:skewX(-12.5deg) skewY(-12.5deg)}33.3%{transform:skewX(6.25deg) skewY(6.25deg)}44.4%{transform:skewX(-3.125deg) skewY(-3.125deg)}55.5%{transform:skewX(1.5625deg) skewY(1.5625deg)}66.6%{transform:skewX(-0.78125deg) skewY(-0.78125deg)}77.7%{transform:skewX(0.390625deg) skewY(0.390625deg)}88.8%{transform:skewX(-0.1953125deg) skewY(-0.1953125deg)}}
+/* Ensure button has proper heartBeat effect */
+.icon-btn.heartbeat:hover{animation:heartBeat 0.6s}
+@keyframes heartBeat{0%{transform:scale(1)}14%{transform:scale(1.3)}28%{transform:scale(1)}42%{transform:scale(1.3)}70%{transform:scale(1)}}
+/* Ensure button has proper rubberBand effect */
+.icon-btn.rubberband:hover{animation:rubberBand 0.6s}
+@keyframes rubberBand{0%{transform:scale(1)}30%{transform:scaleX(1.25) scaleY(0.75)}40%{transform:scaleX(0.75) scaleY(1.25)}50%{transform:scaleX(1.15) scaleY(0.85)}65%{transform:scaleX(0.95) scaleY(1.05)}75%{transform:scaleX(1.05) scaleY(0.95)}100%{transform:scale(1)}}
+/* Ensure button has proper swing effect */
+.icon-btn.swing:hover{animation:swing 0.6s}
+@keyframes swing{20%{transform:rotate(15deg)}40%{transform:rotate(-10deg)}60%{transform:rotate(5deg)}80%{transform:rotate(-5deg)}100%{transform:rotate(0deg)}}
+/* Ensure button has proper hinge effect */
+.icon-btn.hinge:hover{animation:hinge 0.6s}
+@keyframes hinge{0%{transform:rotate(0);transform-origin:top left;animation-timing-function:ease-in-out}20%,60%{transform:rotate(80deg);transform-origin:top left;animation-timing-function:ease-in-out}40%,80%{transform:rotate(60deg);transform-origin:top left;animation-timing-function:ease-in-out}100%{transform:translateY(700px);opacity:0}}
+/* Ensure button has proper rollIn effect */
+.icon-btn.rollin:hover{animation:rollIn 0.6s}
+@keyframes rollIn{0%{opacity:0;transform:translate3d(-100%,0,0) rotate3d(0,0,1,-120deg)}100%{opacity:1;transform:translate3d(0,0,0)}}
+/* Ensure button has proper rollOut effect */
+.icon-btn.rollout:hover{animation:rollOut 0.6s}
+@keyframes rollOut{0%{opacity:1;transform:translate3d(0,0,0)}100%{opacity:0;transform:translate3d(100%,0,0) rotate3d(0,0,1,120deg)}}
+/* Ensure button has proper zoomIn effect */
+.icon-btn.zoomin:hover{animation:zoomIn 0.6s}
+@keyframes zoomIn{0%{opacity:0;transform:scale3d(0.3,0.3,0.3)}50%{opacity:1}100%{opacity:1;transform:scale3d(1,1,1)}}
+/* Ensure button has proper zoomOut effect */
+.icon-btn.zoomout:hover{animation:zoomOut 0.6s}
+@keyframes zoomOut{0%{opacity:1}100%{opacity:0;transform:scale3d(0.3,0.3,0.3)}}
+/* Ensure button has proper slideInDown effect */
+.icon-btn.slideindown:hover{animation:slideInDown 0.6s}
+@keyframes slideInDown{0%{transform:translate3d(0,-100%,0);visibility:visible}100%{transform:translate3d(0,0,0)}}
+
+/* ===== Hero ===== */
+.hero{padding-top:6rem}
+.grid-2{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center}
+.hero-title{margin-top:0}
+.hero .actions{display:flex;gap:.75rem;margin-top:1rem}
+.hero .social{display:flex;gap:.6rem;align-items:center;padding:0;list-style:none;margin:1rem 0 0}
+.hero .social img{width:26px;height:26px;opacity:.9;filter:grayscale(1)}
+.hero-media{justify-self:center}
+.avatar{width:240px;height:240px;border-radius:50%;object-fit:cover;border:2px solid var(--stroke);box-shadow:var(--shadow)}
+
+/* ===== Buttons ===== */
+.btn{--_bg:var(--brand);--_fg:#fff;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.65rem 1rem;border-radius:12px;border:1px solid transparent;background:var(--_bg);color:var(--_fg);text-decoration:none;font-weight:600;box-shadow:var(--shadow)}
+.btn:hover{opacity:.95;transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-outline{--_bg:transparent;--_fg:var(--text);border-color:var(--stroke)}
+.btn-sm{padding:.45rem .8rem;border-radius:10px;font-size:.9rem}
+
+/* ===== Cards / Sections ===== */
+.cards{display:grid;gap:1rem}
+.cards.three{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;box-shadow:var(--shadow);padding:1.1rem}
+/* Ensure paragraphs are visible */
+p{color:var(--text);line-height:1.6;margin-bottom:1rem;opacity:1;visibility:visible;font-size:16px;font-weight:400;text-align:left;max-width:100%;word-wrap:break-word;overflow-wrap:break-word}
+
+/* Theme-specific styles for about_want_p paragraph */
+.card.project{padding:0;overflow:hidden}
+.card.project img{aspect-ratio:16/9;object-fit:cover;border-bottom:1px solid var(--stroke)}
+.card.project .card-body{padding:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;margin:.5rem 0}
+.tags span{padding:.2rem .5rem;border-radius:999px;background:var(--surface);border:1px solid var(--stroke);font-size:.8rem;color:var(--muted)}
+.checklist{margin:0;padding-left:1.1rem}
+.checklist li{margin:.35rem 0}
+
+/* ===== Skills ===== */
+.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}
+.skill{display:flex;gap:.75rem;align-items:center}
+.skill meter{width:100%;height:10px}
+
+/* ===== Timeline ===== */
+.timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--stroke)}
+.timeline li{display:grid;grid-template-columns:8rem 1fr;gap:1rem;padding:1rem 0 1rem 1rem;position:relative}
+.timeline li::before{content:"";position:absolute;left:-7px;top:1.35rem;width:12px;height:12px;border-radius:50%;background:var(--brand)}
+.time{color:var(--muted)}
+
+/* ===== Contact ===== */
+.contact{display:grid;gap:.8rem;max-width:680px;margin:0 auto}
+.contact label{display:grid;gap:.35rem}
+.contact input,.contact textarea{background:var(--card);border:1px solid var(--stroke);border-radius:12px;padding:.7rem;color:var(--text)}
+/* Center align contact section content */
+#contact .container{text-align:center}
+#contact h2{margin-bottom:1rem}
+#contact p{margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto}
+/* Center align form elements */
+#contact .btn{justify-self:center;min-width:120px}
+#contact .muted{text-align:center;margin-top:1rem}
+/* Enhance form styling */
+#contact input,#contact textarea{text-align:left;transition:all 0.3s ease}
+#contact input:focus,#contact textarea:focus{outline:2px solid var(--brand);outline-offset:2px;border-color:var(--brand);transform:translateY(-1px)}
+/* Enhance label styling */
+#contact label span{font-weight:600;color:var(--text);margin-bottom:0.5rem}
+/* Improve spacing and layout */
+#contact{grid-template-columns:1fr;gap:1.5rem}
+#contact label{margin-bottom:0.5rem}
+/* Responsive adjustments for contact section */
+@media (max-width: 768px) {
+  #contact{max-width:100%;padding:0 1rem}
+  #contact .container{padding:0}
+  #contact h2{font-size:1.8rem}
+  #contact p{font-size:0.95rem}
+}
+/* Animation effects for contact section */
+#contact .container{animation:fadeInUp 0.8s ease-out}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+/* Hover effects for contact section */
+#contact .btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(43,103,119,0.3)}
+#contact input:hover,#contact textarea:hover{border-color:var(--brand);transform:translateY(-1px)}
+
+/* ===== Footer ===== */
+.site-footer{border-top:1px solid var(--stroke);background:var(--surface)}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:70px}
+
+/* ===== Ticker ===== */
+.ticker{overflow:hidden;border-block:1px solid var(--stroke);background:var(--surface)}
+.ticker-track{display:flex;gap:2rem;will-change:transform;animation:ticker 30s linear infinite}
+.ticker-item{display:flex;align-items:center;gap:.75rem;white-space:nowrap;padding:.75rem 1rem}
+.ticker-item img{height:28px;width:auto;border-radius:6px}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.ticker-track{animation:none}}
+
+/* ===== A11y ===== */
+.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem 1rem;border-radius:10px;background:var(--brand);color:#fff}
+.muted a{color:inherit}
+
+/* ===== Responsive ===== */
+@media (max-width:900px){
+  .grid-2{grid-template-columns:1fr}
+  .cards.three{grid-template-columns:1fr 1fr}
+}
+@media (max-width:680px){
+  .nav-toggle{display:flex}
+  .nav-list{position:fixed;inset:64px 0 auto 0;background:var(--surface);border-bottom:1px solid var(--stroke);padding:1rem;flex-direction:column;align-items:flex-start;gap:.75rem;transform:translateY(-110%);transition:transform .25s ease}
+  .nav-list.open{transform:translateY(0)}
+  .divider{display:none}
+  .cards.three{grid-template-columns:1fr}
+  .skills{grid-template-columns:1fr}
+}

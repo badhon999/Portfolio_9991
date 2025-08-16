@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV — Md. Hasibul Kadher Badhon</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    @media print{ .site-header,.site-footer,.btn{ display:none !important } body{ background:#fff; } }
+    .cv{max-width:900px;margin:2rem auto;padding:0 1rem}
+    .cv h1{margin-bottom:.25rem}
+    .cv header p{margin:.25rem 0}
+    .cv section{margin:1.5rem 0}
+    .kv{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .kv .block{background:var(--card);border:1px solid var(--stroke);border-radius:12px;padding:1rem}
+    .cv ul{margin:.25rem 0 0 1.1rem}
+    .cv .meta{color:var(--muted)}
+  </style>
+  <script>try{const t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t)}}catch(e){}</script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="index.html#home" class="brand"><img src="Images/mylogo.png" class="brand-logo" alt="Logo"/> <span>Hasibul Badhon</span></a>
+      <ul class="nav-list">
+        <li><a href="Hobby.html" data-i18n="nav_hobby">Hobby</a></li>
+        <li><a href="Blog.html">Blog</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1z"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main class="cv">
+    <header>
+      <h1>Md. Hasibul Kadher Badhon</h1>
+      <p class="meta">Dhaka, Bangladesh · <a href="mailto:rahman.badhon999@gmail.com">rahman.badhon999@gmail.com</a> · +880 1851‑780082</p>
+      <p class="meta"><a href="https://www.linkedin.com/in/hasibul-kadher-badhon-785a84178/">LinkedIn</a> · <a href="https://github.com/badhon999">GitHub</a></p>
+    </header>
+
+    <section>
+      <h2>Summary</h2>
+      <p>Proactive Jr. Support Engineer with hands‑on experience across IT solutions, networking, R&D support and troubleshooting. Passionate about scalable systems and clean UX.</p>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      <div class="block">
+        <h3>Jr. Support Engineer — bracIT <span class="meta">Apr 2025 — Present</span></h3>
+        <ul>
+          <li>Deliver complete IT solutions (software/hardware) including setup & configuration.</li>
+          <li>Team lead for task organization and workload management.</li>
+          <li>Support meetings (on‑site/remote), prepare documentation.</li>
+          <li>Troubleshoot network connectivity & technical issues; vendor & user support aligned with R&D.</li>
+        </ul>
+      </div>
+      <div class="block">
+        <h3>IT Support Engineer (Intern) — Brac Technology <span class="meta">Dec 2024 — Apr 2025</span></h3>
+        <ul>
+          <li>Comprehensive IT support for software/hardware.</li>
+          <li>Configure & maintain devices for optimal performance.</li>
+          <li>Document interactions and solutions.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="kv">
+      <div class="block">
+        <h2>Skills</h2>
+        <ul>
+          <li>Security testing, SOPs, troubleshooting</li>
+          <li>HTML, CSS, JavaScript, Python (Flask)</li>
+          <li>Linux, Git, Docker, MongoDB</li>
+        </ul>
+      </div>
+      <div class="block">
+        <h2>Education</h2>
+        <ul>
+          <li>BSc in CSE — Green University of Bangladesh (ongoing)</li>
+          <li>HSC — Government Science College (2019)</li>
+          <li>SSC — Hasan Ali Govt. High School (2017)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <ul>
+        <li>Aspect‑Based Sentiment Analysis (Banglish dataset; fine‑tuned model)</li>
+        <li>Object Detector — real‑time classification (GitHub)</li>
+        <li>Finding Helping Maid — matching homeowners & housekeepers (GitHub)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Recommendations</h2>
+      <ul>
+        <li>Rubel Mrida — Midland Bank PLC. · <span class="meta">rubel.mrida@midlandbankbd.net</span></li>
+        <li>Mohammed Salahuddin — Senior Manager, BRAC · <span class="meta">salahuddin.rony@brac.net</span></li>
+        <li>Md Solaiman Mia — Assistant Professor, GUB · <span class="meta">solaiman@cse.green.edu.bd</span></li>
+      </ul>
+    </section>
+
+    <p>
+      <a class="btn" href="javascript:window.print()">Print / Save as PDF</a>
+      <a class="btn btn-outline" href="index.html#projects">Back to Projects</a>
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="muted small">© <span id="y"></span> Md. Hasibul Kadher Badhon</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="Hobby.html">Hobby</a>
+        <a href="Blog.html">Blog</a>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog Admin (protected)</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>try{const t=localStorage.getItem('theme'); if(t){document.documentElement.setAttribute('data-theme',t)}}catch(e){}</script>
+  <style>
+    .gate{position:fixed;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);z-index:9999}
+    .gate-card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:1.25rem;width:min(420px,92%);box-shadow:var(--shadow)}
+    .gate-card h1{margin:0 0 .5rem;font-size:1.25rem}
+    .gate-card form{display:grid;gap:.75rem}
+    .gate-card input{background:var(--surface);border:1px solid var(--stroke);border-radius:12px;padding:.7rem;color:var(--text)}
+    .msg{color:#ffb4b4;font-size:.9rem;min-height:1.2rem}
+    .hide{display:none}
+    .toolbar{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+    .card label{display:grid;gap:.35rem;margin:.35rem 0}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+    .preview{max-width:180px;border-radius:10px;border:1px solid var(--stroke);margin-top:.5rem}
+  </style>
+</head>
+<body>
+  <main class="section">
+    <div class="container">
+      <h1>Blog Admin</h1>
+      <p class="muted small">Edit <code>posts.json</code> in your browser. Download the updated file and upload it to publish.</p>
+
+      <div id="app" class="hide">
+        <div class="toolbar">
+          <button class="btn" id="load">Load posts.json</button>
+          <button class="btn btn-outline" id="add">Add new</button>
+          <button class="btn" id="download">Download updated posts.json</button>
+          <button class="btn btn-outline" id="logout">Lock</button>
+        </div>
+        <div id="list" class="cards"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- PASSWORD GATE -->
+  <div id="gate" class="gate">
+    <div class="gate-card">
+      <h1>Restricted</h1>
+      <p class="muted small">Enter admin password</p>
+      <form id="gate-form">
+        <input id="pw" type="password" placeholder="Password" autocomplete="current-password" required />
+        <div class="msg" id="msg"></div>
+        <button class="btn" type="submit">Unlock</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    /* ---------- PASSWORD GATE ---------- */
+    const HASH = "830aeb0414be2e340be05528f591f8968f210366670fd650b15b262f356cfcf3"; // paste the SHA-256 from the earlier step
+    const MAX_ATTEMPTS = 5, KEY_UNLOCK="blog_admin_unlocked", KEY_ATTEMPTS="blog_admin_attempts";
+    const gate = document.getElementById('gate'), app = document.getElementById('app'),
+          msg = document.getElementById('msg'), form = document.getElementById('gate-form'), pwEl = document.getElementById('pw');
+    function attempts(){ return +(sessionStorage.getItem(KEY_ATTEMPTS)||0); }
+    function setAttempts(n){ sessionStorage.setItem(KEY_ATTEMPTS, n); }
+    async function sha256Hex(s){ const b=new TextEncoder().encode(s); const h=await crypto.subtle.digest('SHA-256', b); return [...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,'0')).join(''); }
+    function unlock(){ sessionStorage.setItem(KEY_UNLOCK,"1"); gate.classList.add('hide'); app.classList.remove('hide'); }
+    form.addEventListener('submit', async e=>{
+      e.preventDefault();
+      if(attempts()>=MAX_ATTEMPTS){ msg.textContent="Locked. Reload to try again."; return; }
+      const ok = (await sha256Hex(pwEl.value.trim()))===HASH;
+      if(ok) unlock(); else { const left = MAX_ATTEMPTS-(attempts()+1); setAttempts(attempts()+1); msg.textContent = left>0?`Wrong password. ${left} left.`:"Locked. Reload page."; pwEl.value=""; pwEl.focus(); }
+    });
+    if(sessionStorage.getItem(KEY_UNLOCK)==="1") unlock();
+
+    /* ---------- ADMIN UI ---------- */
+    let posts=[]; const list=document.getElementById('list');
+
+    // file -> dataURL -> posts[i].cover + live preview
+    window.handleCoverFile = function(input, idx){
+      const f = input.files && input.files[0]; if(!f) return;
+      const r = new FileReader();
+      r.onload = e => { posts[idx].cover = e.target.result; render(); };
+      r.readAsDataURL(f);
+    };
+
+    function coverBlock(i,p){
+      return `
+        <div>
+          <strong>Cover</strong>
+          <div class="grid2">
+            <label>Cover URL (or data URL)
+              <input value="${p.cover||''}" oninput="posts[${i}].cover=this.value">
+            </label>
+            <label>Choose Cover File
+              <input type="file" accept="image/*" onchange="handleCoverFile(this, ${i})">
+            </label>
+          </div>
+          ${p.cover?`<img class="preview" src="${p.cover}" alt="cover preview">`:''}
+        </div>
+      `;
+    }
+
+    function render(){
+      list.innerHTML = posts.map((p,i)=>`
+        <article class="card">
+          <label>Slug <input value="${p.slug||''}" onchange="posts[${i}].slug=this.value"></label>
+          <label>Title <input value="${p.title||''}" onchange="posts[${i}].title=this.value"></label>
+          <label>Date <input type="date" value="${(p.date||'').slice(0,10)}" onchange="posts[${i}].date=this.value"></label>
+          ${coverBlock(i,p)}
+          <label>Tags (comma)
+            <input value="${(p.tags||[]).join(', ')}" onchange="posts[${i}].tags=this.value.split(/\\s*,\\s*/).filter(Boolean)">
+          </label>
+          <label>Excerpt <textarea rows="2" onchange="posts[${i}].excerpt=this.value">${p.excerpt||''}</textarea></label>
+          <label>Content (HTML) <textarea rows="8" onchange="posts[${i}].content=this.value">${p.content||''}</textarea></label>
+          <p><button class="btn btn-sm" onclick="posts.splice(${i},1);render()">Delete</button></p>
+        </article>
+      `).join('');
+    }
+
+    document.getElementById('load').onclick=()=>{ fetch('posts.json').then(r=>r.json()).then(d=>{posts=d;render()}); };
+    document.getElementById('add').onclick = ()=>{ posts.unshift({slug:'new-post',title:'New Post',date:new Date().toISOString().slice(0,10),excerpt:'',cover:'',tags:[],content:'<p>Write here…</p>'}); render(); };
+    document.getElementById('download').onclick=()=>{
+      const blob=new Blob([JSON.stringify(posts,null,2)],{type:'application/json'});
+      const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='posts.json'; a.click(); URL.revokeObjectURL(a.href);
+    };
+    document.getElementById('logout').onclick=()=>{ sessionStorage.removeItem(KEY_UNLOCK); sessionStorage.removeItem(KEY_ATTEMPTS); app.classList.add('hide'); gate.classList.remove('hide'); pwEl.focus(); };
+  </script>
+</body>
+</html>
