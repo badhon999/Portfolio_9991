@@ -344,7 +344,7 @@ p{color:var(--text);line-height:1.6;margin-bottom:1rem;opacity:1;visibility:visi
 /* Center align contact section content */
 #contact .container{text-align:center}
 #contact h2{margin-bottom:1rem}
-#contact p{margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto}
+#contact p{margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto;text-align: center}
 /* Center align form elements */
 #contact .btn{justify-self:center;min-width:120px}
 #contact .muted{text-align:center;margin-top:1rem}
@@ -400,3 +400,111 @@ p{color:var(--text);line-height:1.6;margin-bottom:1rem;opacity:1;visibility:visi
   .cards.three{grid-template-columns:1fr}
   .skills{grid-template-columns:1fr}
 }
+
+.project-card {
+  width: 250px;
+  height: 200px;
+  border: 2px solid #2169a5;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-left: 120%;
+}
+
+.project-card:hover {
+  background-color: #f8f9fa;
+}
+
+.etc-card {
+  text-align: center;
+}
+
+.plus {
+  font-size: 48px;
+  color: #2169a5;
+  display: block;
+}
+
+/* Timeline list styling */
+.new_Timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  background-color: white;
+}
+
+/* Timeline line */
+.new_Timeline::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #2169a5;
+}
+
+/* Each hobby item */
+.new_Timeline li {
+  position: relative;
+  margin: 20px 0 20px 50px;
+  padding-left: 20px;
+}
+
+/* Circle marker */
+.new_Timeline li::before {
+  content: '';
+  position: absolute;
+  left: -32px;
+  top: 5px;
+  width: 15px;
+  height: 15px;
+  background: #2169a5;
+  border-radius: 50%;
+}
+
+/* Hobby content box */
+.new_Timeline .content {
+  background: #ffffff;
+  padding: 15px 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.021);
+}
+
+.new_Timeline .content h3 {
+  margin: 0 0 5px;
+  color: #2169a5;
+}
+
+/* remove vertical padding on the section/card if they add space */
+#Hobby.section { padding-block: 0; }
+article.card { padding-block: 1rem; }            /* adjust if needed */
+
+/* tighten the list */
+.new_Timeline { margin-block: 0; padding-block: 0; }
+
+/* smaller gaps between items */
+.new_Timeline li { margin-block: 12px; }         /* was 20px */
+
+/* no extra space above the first or below the last item */
+.new_Timeline li:first-child { margin-top: 0; }
+.new_Timeline li:last-child  { margin-bottom: 0; }
+
+/* keep the vertical line inside the first/last dots */
+.new_Timeline::before { top: 12px; bottom: 12px; }
+
+/* (optional) remove extra spacing inside content */
+.new_Timeline .content h3 { margin: 0 0 4px; }
+.new_Timeline .content p  { margin: 0; }
+
+.hobby_title {
+  text-align: center; 
+  margin: 0 auto 1rem;
+}
+article.card .hobby_title{ text-align:center !important; }
+#post-cover { display:block; margin:1rem auto; }

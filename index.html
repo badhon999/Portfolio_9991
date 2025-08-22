@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Md. Hasibul Kadher Badhon — Portfolio</title>
   <meta name="description" content="Personal portfolio — projects, skills, experience, and contact." />
-  <link rel="icon" href="myphoto.png" />
+  <link rel="icon" href="Images/mylogo.png" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Md. Hasibul Kadher Badhon — Portfolio" />
   <meta property="og:description" content="Projects, skills, experience, and contact." />
-  <meta property="og:image" content="myphoto.png" />
+  <meta property="og:image" content="Images/mylogo.png" />
   <meta property="og:type" content="website" />
 
   <!-- Twitter Card -->
@@ -49,7 +49,7 @@
   <header class="site-header">
     <nav class="nav container" aria-label="Primary">
       <a href="#home" class="brand">
-        <img src="myphoto.png" alt="Logo" class="brand-logo" loading="lazy" />
+        <img src="Images/mylogo.png" alt="Logo" class="brand-logo" loading="lazy" />
         <span data-i18n="brand_name">Hasibul Badhon</span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Toggle menu">
@@ -81,7 +81,7 @@
       <div class="container grid-2">
         <div>
           <h1 class="hero-title" data-i18n="hero_title">Hi, I'm <span class="accent">Badhon</span> —<br />Jr. Support Engineer at bracIT</h1>
-          <p class="muted" data-i18n="hero_tag">I build reliable systems and user-friendly web experiences. Exploring networking, security testing, and cloud.</p>
+          <p class="muted" data-i18n="hero_tag">I build reliable systems and user-friendly web experiences. Exploring data analysis networking, systems testing, and cloud. <br><br>I'm from Chandpur,Chittagong, Bangladesh and now living in Sector 14, Uttara, Dhaka-1230.</p>
           <div class="actions">
             <a href="#projects" class="btn" data-i18n="cta_projects">View Projects</a>
             <a href="CV.html" class="btn btn-outline" data-i18n="cta_cv">Download CV</a>
@@ -144,16 +144,26 @@
           </article>
           <article class="card">
             <h3 data-i18n="about_use_h">What I use</h3>
-            <p data-i18n="about_use_p">Linux, Git, Docker, Python, Mysql, PHP.</p>
+            <p data-i18n="about_use_p"><ul>
+              <li>Linux</li>
+              <li>Git</li>
+              <li>Java</li>
+              <li>Machine Learning</li>
+              <li>Deep Learning</li>
+              <li>Docker</li>
+              <li>Python</li>
+              <li>MySQL</li>
+              <li>PHP</li>
+            </ul></p>
           </article>
           <article class="card">
             <h3 data-i18n="about_want_h">What I want</h3>
             <p data-i18n="about_want_p">Roles to grow as a <span class="accent">System Engineer</span> and reliable <span class="accent">Data Analyst</span>.</p>
-            <li data-i18n="about_want_1">CCNA</li>
+             <ul> <li data-i18n="about_want_1">CCNA</li>
               <li data-i18n="about_want_2">Data Analytics</li>
-              <li data-i18n="about_want_3">AWS | Google Cloud</li>
+              <li data-i18n="about_want_3">AWS | Google Cloud | Windows Server</li>
               <li data-i18n="about_want_4">Ansible | CI/CD pipelines | Docker & Kubernetes</li>
-
+              </ul>
           </article>
         </div>
       </div>
@@ -168,52 +178,62 @@
           <div class="skill"><span>CSS</span><meter min="0" max="100" value="80">80%</meter></div>
           <div class="skill"><span>JavaScript</span><meter min="0" max="100" value="65">65%</meter></div>
           <div class="skill"><span>Python</span><meter min="0" max="100" value="70">70%</meter></div>
-          <div class="skill"><span data-i18n="skill_sec">Security Testing</span><meter min="0" max="100" value="60">60%</meter></div>
+          <div class="skill"><span>Machine Learning</span><meter min="0" max="100" value="75">75%</meter></div>
+          <div class="skill"><span>Java</span><meter min="0" max="100" value="80">80%</meter></div>
         </div>
       </div>
     </section>
 
     <!-- Projects -->
+    <!-- https://github.com/badhon999/ElectroMart -->
     <section id="projects" class="section">
       <div class="container">
         <h2 data-i18n="projects_h">Projects</h2>
         <div class="cards three">
           <article class="card project">
-            <img src="slide1.jpg" alt="ElectroMart" loading="lazy" />
-            <div class="card-body">
-              <h3>ElectroMart — AI Recommendations</h3>
-              <p>E-commerce demo with personalized recommendations from user behavior (Flask + MongoDB).</p>
-              <div class="tags"><span>Flask</span><span>MongoDB</span><span>ML</span></div>
-              <div class="links">
+            <img src="Images/Projects/ElectroMart.png" alt="ElectroMart" loading="lazy" />
+            <div class="card-body" onclick="window.open('https://github.com/badhon999/ElectroMart', '_blank')"  style="cursor: pointer;">
+              <h3>ElectroMart — AI Recommendations based E-Commerce</h3>
+              <p>E-commerce demo with personalized recommendations from user behavior (Django).</p>
+              <div class="tags"><span>Django</span><span>SQLite</span><span>ML</span></div>
+              <!-- <div class="links">
                 <a href="#" class="btn btn-sm">Live</a>
                 <a href="#" class="btn btn-sm btn-outline">Code</a>
-              </div>
+              </div> -->
+              
+            </div>
+          </article>
+          <article class="card project" onclick="window.open('https://github.com/badhon999/Finding-Helping-Maid', '_blank')"  style="cursor: pointer;">
+            <img src="Images/Projects/HELPING_HAND.png" alt="Staff Search" loading="lazy" />
+            <div class="card-body">
+              <h3>Finding-Helping-Maid</h3>
+              <p>HTML + PHP + MySQL app for searching helping hand for household activities with clean UI and pagination.</p>
+              <div class="tags"><span>PHP</span><span>MySQL</span></div>
+              <!-- <div class="links">
+                <a href="#" class="btn btn-sm">Live</a>
+                <a href="#" class="btn btn-sm btn-outline">Code</a>
+              </div> -->
+              
             </div>
           </article>
           <article class="card project">
-            <img src="slide2.jpg" alt="Staff Search" loading="lazy" />
-            <div class="card-body">
-              <h3>Staff Search App</h3>
-              <p>HTML + Flask + Mongo app for searching staff information with clean UI and pagination.</p>
-              <div class="tags"><span>Flask</span><span>Mongo</span><span>UI</span></div>
-              <div class="links">
-                <a href="#" class="btn btn-sm">Live</a>
-                <a href="#" class="btn btn-sm btn-outline">Code</a>
-              </div>
-            </div>
-          </article>
-          <article class="card project">
-            <img src="slide3.jpg" alt="Ansible" loading="lazy" />
-            <div class="card-body">
-              <h3>Ansible Roles</h3>
-              <p>Reusable roles (balancer, phpinfo) with Jinja2 templating for dynamic HAProxy backends.</p>
-              <div class="tags"><span>Ansible</span><span>HAProxy</span></div>
-              <div class="links">
+            <img src="Images/Projects/ANSA.png" alt="Aspect Based Sentiment Analysis for E-Commerce Websites" loading="lazy" />
+            <div class="card-body" onclick="window.open('https://huggingface.co/spaces/ahmudz/banglish-absa-analyzer', '_blank')"  style="cursor: pointer;">
+              <h3>ABSA for E-Commerce Reviews</h3>
+              <p>A BERT based aspect based sentiment analysis research on Banglish data for sentiment analysis for betterment in E-commerce sites with Romanian Scripts.</p>
+              <div class="tags"><span>Python</span><span>Deep Learning</span><span>Hugging Face</span></div>
+              <!-- <div class="links">
                 <a href="#" class="btn btn-sm">Docs</a>
                 <a href="#" class="btn btn-sm btn-outline">Code</a>
-              </div>
+              </div> -->
             </div>
           </article>
+          <div class="project-card" onclick="window.open('https://github.com/badhon999?tab=repositories', '_blank')"  style="cursor: pointer;">
+            <div class="etc-card">
+              <span class="plus">+</span>
+              <p>etc...</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -227,10 +247,18 @@
             <div class="time">2025 — Present</div>
             <div class="content">
               <h3>Jr. Support Engineer — bracIT</h3>
-              <p>Deliver complete IT solutions; lead tasks; support meetings and documentation; troubleshoot network issues; user support aligned with R&D activities.</p>
+              <p>Deliver complete IT solutions, lead team & tasks, support meetings and documentation, troubleshoot network issues, user support aligned with R&D activities, and collaboration with other technology teams.</p>
             </div>
           </li>
           
+          <li>
+            <div class="time">2024 — 2025</div>
+            <div class="content">
+              <h3>IT & Network Operations Intern — BRAC</h3>
+              <p>Troubleshoot technical issues, maintain systems and networks, assist users with hardware and software, and ensure smooth IT operations through documentation, configuration, and collaboration with other teams.</p>
+            </div>
+          </li>
+
           <li>
             <div class="time">2024 — 2025</div>
             <div class="content">
@@ -263,7 +291,7 @@
     <section id="contact" class="section">
       <div class="container">
         <h2 data-i18n="contact_h">Contact</h2>
-        <p data-i18n="contact_p">Have a role or project in mind? Let’s talk.</p>
+        <p data-i18n="contact_p">Have a role or project in mind? Let's talk.</p>
 
         <!-- Web3Forms: AJAX submit + alert (no redirect) -->
         <!-- 1) Replace YOUR_ACCESS_KEY_HERE with your Web3Forms access key
